@@ -45,6 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AdjacencySensor.cs" />
      <Compile Include="Assets\Agent.cs" />
      <Compile Include="Assets\Enemy.cs" />
      <Compile Include="Assets\User.cs" />

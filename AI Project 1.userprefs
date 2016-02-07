@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\glossasim\Assets\Scripts\MainMenuControls.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\Darkwave-Project\Darkwave\Darkwave Demo\Assets\Scripts\Weapons\BuildDevice.cs">
     <Files>
-      <File FileName="..\glossasim\Assets\Scripts\MainMenuControls.cs" Line="91" Column="27" />
+      <File FileName="..\Darkwave-Project\Darkwave\Darkwave Demo\Assets\Scripts\Weapons\BuildDevice.cs" Line="92" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

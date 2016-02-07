@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,12 +13,14 @@ public class User : Agent
 	public List<GameObject> sensedAgents = new List<GameObject>();
 	public int adjacencySensorRange;
 	public bool showAdjacencySensor;
+	public GameObject adjacencySensor;
 
 
 	// Use this for initialization
 	void Start () 
 	{
 		controller = GetComponent<CharacterController>();
+		Invoke("RemoveSelf",1);
 	}
 	
 	// Update is called once per frame
@@ -26,14 +28,11 @@ public class User : Agent
 	{
 		AgentUpdate();
 		MoveController();
+
 		WallSensors();
 		if(showWallSensors) VisualizeWallSensors();
-	}
 
-	List<GameObject> AdjacencySensor()
-	{
-
-		return sensedAgents;
+		AdjacencySensor();
 	}
 
 	void WallSensors()
@@ -74,14 +73,32 @@ public class User : Agent
 		Debug.DrawRay(gameObject.transform.position, -gameObject.transform.right*wallSensorRange, Color.black);
 	}
 
+	void AdjacencySensor()
+	{
+		Vector3 aSensorRange =new Vector3(adjacencySensorRange,.1f,adjacencySensorRange);
+
+		if(adjacencySensor.transform.localScale != aSensorRange)
+			adjacencySensor.transform.localScale = aSensorRange;
+
+		if(adjacencySensor.GetComponent<MeshRenderer>().enabled != showAdjacencySensor)
+			adjacencySensor.GetComponent<MeshRenderer>().enabled = showAdjacencySensor;
+	}
+
+
 	void MoveController()
 	{	
-		transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal"), 0));
+		transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal")*2, 0));
 
 		Vector3 moveDirection = new Vector3(0, 0, Input.GetAxis("Vertical"));
 		moveDirection = transform.TransformDirection(moveDirection);// makes input directions heading relative
 		moveDirection *= 10;
 
 		controller.Move(moveDirection * Time.deltaTime);
+	}
+
+	//Takes the sensing game object out of the sensed agents list
+	void RemoveSelf()
+	{
+		sensedAgents.Remove(gameObject);
 	}
 }
