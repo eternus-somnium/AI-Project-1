@@ -29,28 +29,24 @@ public class WallSensors : MonoBehaviour
 		
 		RaycastHit h;
 		
-		
+		//Set raycast results
+		//Forward
 		if(Physics.Raycast(fWallSensor, out h, wallSensorRange) && h.transform.gameObject.tag == "Wall")
 			wallSensorReadings[0] = Vector3.Distance(gameObject.transform.position, h.point);
 		else wallSensorReadings[0] = -1;
-		
-		//Debug.Log("F " +h.point);
-		
+
+		//Right
 		if(Physics.Raycast(rWallSensor, out h, wallSensorRange) && h.transform.gameObject.tag == "Wall")
 			wallSensorReadings[1] = Vector3.Distance(gameObject.transform.position, h.point);
 		else wallSensorReadings[1] = -1;
-		
-		//Debug.Log("R " + h.point);
-		
-		
+
+		//Left
 		if(Physics.Raycast(lWallSensor, out h, wallSensorRange) && h.transform.gameObject.tag == "Wall")
 			wallSensorReadings[2] = Vector3.Distance(gameObject.transform.position, h.point);
 		else wallSensorReadings[2] = -1;
-		
-		//Debug.Log("L" + h.point);
-		
 	}
-	
+
+
 	void VisualizeWallSensors()
 	{
 		Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward*wallSensorRange, Color.black);

@@ -5,8 +5,10 @@ using System.Collections.Generic;
 public class AdjacencySensor : MonoBehaviour 
 {
 	public List<GameObject> sensedAgents = new List<GameObject>();
+	public List<float> sensedAgentHeadings;
 	public int adjacencySensorRange;
 	public bool showAdjacencySensor;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -16,10 +18,11 @@ public class AdjacencySensor : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		SensorSize();
+		Sensor();
+		AgentHeadings();
 	}
 
-	void SensorSize()
+	void Sensor()
 	{
 		Vector3 aSensorRange = new Vector3(adjacencySensorRange*2,.1f,adjacencySensorRange*2);
 		
@@ -30,7 +33,14 @@ public class AdjacencySensor : MonoBehaviour
 			gameObject.GetComponent<MeshRenderer>().enabled = showAdjacencySensor;
 	}
 
-	//Takes the sensing game object out of the sensed agents list
+	void AgentHeadings()
+	{
+		sensedAgentHeadings = new List<float>();
+		foreach(GameObject g in sensedAgents)
+			sensedAgentHeadings.Add(g.GetComponent<Agent>().heading);
+	}
+
+	//Takes the sensing game object out of its own sensed agents list
 	void RemoveSelf()
 	{
 		sensedAgents.Remove(gameObject.transform.parent.gameObject);
